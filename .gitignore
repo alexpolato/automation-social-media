@@ -1,0 +1,5 @@
+
+
+# Example: ignore the 'node_modules' folder
+.venv/
+.env/
