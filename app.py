@@ -10,12 +10,12 @@ APP_SECRET = os.environ.get("APP_SECRET", "sua_app_secret_aqui")
 
 @app.route("/")
 def home():
-    return "<p>Servidor Flask está rodando!</p>", 200
+    return "<p>Servidor Flask está rodando!</p>"
 
 
 @app.route("/privacy-policy")
 def privacy_policy():
-    return jsonify({"privacy_policy": "https://www.seusite.com/privacy-policy"}), 200
+    return jsonify({"privacy_policy": "https://www.seusite.com/privacy-policy"})
 
 
 @app.route("/webhook", methods=["GET", "POST"])
