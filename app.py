@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 import json
 import os
 from ai_function.gemini_text import generate_text
@@ -16,7 +16,7 @@ def hello_world():
 
 @app.route("/privacy-policy")
 def privacy_policy():
-    return jsonify({"privacy_policy": "https://www.seusite.com/privacy-policy"}), 200
+    return send_file("privacy_policy/index.html")
 
 
 @app.route("/webhook", methods=["GET", "POST"])
