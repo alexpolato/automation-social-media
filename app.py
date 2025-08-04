@@ -1,21 +1,22 @@
 from flask import Flask, request, jsonify
 import json
 import os
+from ai_function.gemini_text import generate_text
+from flask_cors import CORS
+
 
 app = Flask(__name__)
-
-VERIFY_TOKEN = os.environ.get("VERIFY_TOKEN", "meutokenseguro")
-APP_SECRET = os.environ.get("APP_SECRET", "sua_app_secret_aqui")
+CORS(app)
 
 
-@app.route("/")
-def home():
-    return "<p>Servidor Flask está rodando!</p>"
+@app.route("/api/python")
+def hello_world():
+    return "<p>Hello, World!</p>"
 
 
 @app.route("/privacy-policy")
 def privacy_policy():
-    return jsonify({"privacy_policy": "https://www.seusite.com/privacy-policy"})
+    return jsonify({"privacy_policy": "https://www.seusite.com/privacy-policy"}), 200
 
 
 @app.route("/webhook", methods=["GET", "POST"])
@@ -40,5 +41,19 @@ def webhooks():
         return "<p>This is POST Request</p>"
 
 
+@app.route("/agent-ia", methods=["POST"])
+def agent_ia(prompt=str):
+
+    data = request.get_json()
+    if not data or "prompt" not in data:
+        return jsonify({"error": "Invalid request"}), 400
+
+    # response = generate_text(prompt=data["prompt"])
+    print("prompt:", data["prompt"])
+    # print("response:", response)
+    return prompt
+    return jsonify(response), 200
+
+
 if __name__ == "__main__":
-    app.run(port=5000)
+    app.run(port=5328)
